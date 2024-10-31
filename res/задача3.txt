@@ -1,0 +1,20 @@
+создал compose.yaml
+
+проверим
+docker compose config
+
+docker compose up
+
+были ошибки с переменными.
+проверим переменные
+docker exec shvirtd-example-python-web-1    printenv MYSQL_DATABASE
+
+пришлось откорректировать переменные для web
+
+curl -L http://127.0.0.1:8090
+
+docker exec -ti shvirtd-example-python-db-1  mysql -uroot -pYtReWq4321
+
+
+првоеряем от себя
+curl -L http://158.160.49.45:8090

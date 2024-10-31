@@ -1,0 +1,54 @@
+Задача 1
+Сделайте в своем github пространстве fork репозитория. Примечание: В связи с доработкой кода python приложения. Если вы уверены что задание выполнено вами верно, а код python приложения работает с ошибкой то используйте вместо main.py файл old_main.py(просто измените CMD)
+Создайте файл с именем Dockerfile.python для сборки данного проекта. Используйте базовый образ python:3.9-slim. Обязательно используйте конструкцию COPY . . в Dockerfile. Не забудьте исключить ненужные в имадже файлы с помощью dockerignore. Протестируйте корректность сборки.
+
+
+задача 2
+yc container registry create --name test
+
+	done (1s)
+	id: crp2k5ir1sju5s4l4ldj
+	folder_id: b1gg0512n1fejb81t8f8
+	name: test
+	status: ACTIVE
+	created_at: "2024-10-28T13:22:55.911Z"
+
+настроить авторизацию 
+https://yandex.cloud/ru/docs/container-registry/operations/authentication
+
+oauth токен 
+y0_AgAAAAAHxUraAATuwQAAAAEWBwILAABq21DjNndL_pFkxN01awdJD01ccw
+
+yc container registry configure-docker
+	docker configured to use yc --profile "default" for authenticating "cr.yandex" container registries
+	Credential helper is configured in '/home/barmaq/.docker/config.json'
+
+docker pull ubuntu
+docker tag ubuntu \
+cr.yandex/crp2k5ir1sju5s4l4ldj/ubuntu:hello
+
+docker push \
+cr.yandex/crp2k5ir1sju5s4l4ldj/ubuntu:hello
+
+docker run \
+cr.yandex/crp2k5ir1sju5s4l4ldj/ubuntu:hello
+
+---------------
+скачать файлы из github
+
+sudo apt update
+sudo apt install git
+git clone https://github.com/barmaq/shvirtd-example-python
+
+создаем образ и  добавляем егов  яндекс регистри
+создаем - внимание на точку в конце. исключения добавляются в файле .dockerignore
+docker build -t python -f Dockerfile.python .
+
+docker tag python \
+cr.yandex/crp2k5ir1sju5s4l4ldj/python:1.0
+
+docker push \
+cr.yandex/crp2k5ir1sju5s4l4ldj/python:1.0
+
+сканировать на предмет уязвимостей :
+https://yandex.cloud/ru/docs/container-registry/operations/scanning-docker-image

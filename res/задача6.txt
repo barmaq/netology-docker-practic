@@ -1,0 +1,34 @@
+docker pull hashicorp/terraform:latest
+docker save hashicorp/terraform:latest -o terraform_image.tar
+
+DIVE_VERSION=$(curl -s "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep -Po '"tag_name": "v\K[0-9.]+')
+curl -Lo dive.deb "https://github.com/wagoodman/dive/releases/latest/download/dive_${DIVE_VERSION}_linux_amd64.deb"
+sudo apt install -y ./dive.deb
+dive --version
+
+dive hashicorp/terraform:latest
+делаем фильтр по terraform
+
+ид леера
+sha256:c3c3a5978391c2884975a1e49c4d3ee1e29dac201a59bf27685a1b750ad5e64a
+
+tar -tf terraform_image.tar
+tar -xf terraform_image.tar -C /home/barmaq/temp/terraform
+
+
+идем в папку с леером и распаковываем его 
+
+tar -xf c3c3a5978391c2884975a1e49c4d3ee1e29dac201a59bf27685a1b750ad5e64a -C /home/barmaq/temp/terraform
+
+------------------------
+
+docker run -d hashicorp/terraform:latest sleep infinity
+
+
+docker run hashicorp/terraform -d
+docker ps
+
+
+docker cp "$container_id":/bin/terraform ./temp
+docker rm -f "$container_id"
+
