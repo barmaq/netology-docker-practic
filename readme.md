@@ -1,5 +1,6 @@
 Задача 1 :
 Сделайте в своем github пространстве fork netology-code/shvirtd-example-python, использовать dockerignore
+https://github.com/barmaq/shvirtd-example-python
 
 ----------------------------------
 ----------------------------------
